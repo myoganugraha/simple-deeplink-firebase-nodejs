@@ -52,7 +52,7 @@ let token = '1234g4u234g543jn2b';
 let email = 'hahaha@gmail.com';
 const iosBundleId = 'com.example.unilinkExample';
 const androidPackageName = 'com.example.unilink_example';
-const firebaseWebAPIkey = 'AIzaSyB2fjYKaP4VxsfNOJvvyN_zCae5u9NZaNo'
+const firebaseWebAPIkey = ''
 
 axios.post(`https://firebasedynamiclinks.googleapis.com/v1/shortLinks?key=${firebaseWebAPIkey}`, {
     "dynamicLinkInfo": {
@@ -64,7 +64,10 @@ axios.post(`https://firebasedynamiclinks.googleapis.com/v1/shortLinks?key=${fire
         "androidInfo": {
             "androidPackageName": androidPackageName
         }
-    }
+    },
+    "suffix": {
+        "option": "UNGUESSABLE"
+      }
 }, {
     headers: {
         'Content-Type': 'application/json'
