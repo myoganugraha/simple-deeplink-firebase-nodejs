@@ -44,38 +44,16 @@
 
 //     });
 
-const axios= require('axios');
+const express = require('express');
+const app = express();
+const router = express.Router();
+const port = 8080;
+const bodyParse = require('body-parser');
 
-const domainPrefix = 'unilinkexample.page.link';
-const link = 'https://dynamic.link.example/reset-password?';
-let token = '1234g4u234g543jn2b';
-let email = 'hahaha@gmail.com';
-const iosBundleId = 'com.example.unilinkExample';
-const androidPackageName = 'com.example.unilink_example';
-const firebaseWebAPIkey = ''
+app.use(bodyParse.json());
+require('./routes')(router);
+app.use('/api/deep-link', router);
 
-axios.post(`https://firebasedynamiclinks.googleapis.com/v1/shortLinks?key=${firebaseWebAPIkey}`, {
-    "dynamicLinkInfo": {
-        "domainUriPrefix": domainPrefix,
-        "link": `${link}email=${email}&token=${token}`,
-        "iosInfo":{
-            "iosBundleId": iosBundleId
-        },
-        "androidInfo": {
-            "androidPackageName": androidPackageName
-        }
-    },
-    "suffix": {
-        "option": "UNGUESSABLE"
-      }
-}, {
-    headers: {
-        'Content-Type': 'application/json'
-    }
-})
-.then((res) => {
-    console.log("data", res.data)
-})
-.catch((err) => {
-    console.log("error", err.response.data)
-})
+app.listen(port);
+console.log('App Run on ' + port);
+
